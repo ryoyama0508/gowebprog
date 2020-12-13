@@ -5,14 +5,22 @@ import (
 	"crypto/sha1"
 	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
 	"log"
+
+	_ "github.com/lib/pq"
 )
 
+//Db is global variable
 var Db *sql.DB
+
+//構造体の中身をいじれるようにpinter type にしている
 
 func init() {
 	var err error
+
+	//上の行をなくして Db, err:= としてしまうと、global の Db に対する値変更でなくなり新しくlocal var をつくったことになる
+	//(つまり本体の Db は nil のまま)
+	//したがってnil pointer dereference になる
 	Db, err = sql.Open("postgres", "dbname=chitchat sslmode=disable")
 	if err != nil {
 		log.Fatal(err)
