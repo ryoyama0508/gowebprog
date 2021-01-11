@@ -1,9 +1,6 @@
 {
 	"ImportPath": "github.com/gowebprog/ch10/mosaic-heroku",
-	"GoVersion": "go1.15",
+	"GoVersion": "go1.15.0",
 	"GodepVersion": "v80",
-	"Packages": [
-		"./..."
-	],
 	"Deps": []
 }
