@@ -12,6 +12,7 @@ func (h HelloHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello!")
 }
 
+//ハンドラいれてハンドラだす
 func log(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("ハンドラが呼び出されました - %T\n", h)
@@ -19,9 +20,15 @@ func log(h http.Handler) http.Handler {
 	})
 }
 
+//ハンドラいれてハンドラだす
 func protect(h http.Handler) http.Handler {
+	//
+	//ここで型変換して関数を関数型にしてハンドラ関数からハンドラにする
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// some code to make sure the user is authorized
+
+		//ハンドラのメソッドを呼び出す
+		//多分h を見た瞬間に、hってなにってなり、logにいく
 		h.ServeHTTP(w, r)
 	})
 }

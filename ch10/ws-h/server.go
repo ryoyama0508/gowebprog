@@ -2,10 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"os"
 	"path"
 	"strconv"
-	"os"
 )
 
 type Post struct {
@@ -19,7 +20,12 @@ func main() {
 		Addr: ":" + os.Getenv("PORT"),
 	}
 	http.HandleFunc("/post/", handlePost)
+	http.HandleFunc("/", handlePost)
 	server.ListenAndServe()
+}
+
+func handlerIndex(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello world!")
 }
 
 // main handler function

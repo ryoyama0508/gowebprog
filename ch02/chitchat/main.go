@@ -11,6 +11,8 @@ func main() {
 	// handle static assets
 	mux := http.NewServeMux()
 	files := http.FileServer(http.Dir(config.Static))
+	// the first arg is url, the second is handler
+	// ここがマルチプレクサに Handler を登録されたという手続き
 	mux.Handle("/static/", http.StripPrefix("/static/", files))
 
 	//
@@ -18,11 +20,14 @@ func main() {
 	// route handler functions defined in other files
 	//
 
+	//hadler はinterface であって、HandleFunc に使われるのはただのハンドラ関数である
+	//これは、writer と request を引数にもってる関数である。
 	// index
 	mux.HandleFunc("/", index)
 	// error
 	mux.HandleFunc("/err", err)
 
+	//HandleFunc はハンドラ関数をHandler に変換して、Handleの引数に登録する関数
 	// defined in route_auth.go
 	mux.HandleFunc("/login", login)
 	mux.HandleFunc("/logout", logout)

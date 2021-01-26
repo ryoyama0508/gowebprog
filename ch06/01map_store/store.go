@@ -44,3 +44,9 @@ func main() {
 		fmt.Println(post)
 	}
 }
+
+// post1 struct
+// post2 struct
+
+//sau posts 1 and 4
+//pedro posts 2 and 3

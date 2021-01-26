@@ -14,7 +14,10 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
+	"log"
+
 	_ "github.com/lib/pq"
 )
 
@@ -119,5 +122,18 @@ func main() {
 	fmt.Println(posts) // []
 
 	// Delete all posts
-  // DeleteAll()
+	// DeleteAll()
+	// JSONデコード
+	var decode_data interface{}
+	if err := json.Unmarshal(bytes, &decode_data); err != nil {
+		log.Fatal(err)
+	}
+	// 表示
+	for _, data := range decode_data.([]interface{}) {
+		var d = data.(map[string]interface{})
+		fmt.Printf("%d : %s\n", int(d["id"].(float64)), d["name"])
+	}
+
 }
+
+[map[name:akane birthday:08-16 vivid_info:map[color:red weapon:Rang] id:1] map[id:2 name:aoi birthday:06-17 vivid_info:map[color:blue weapon:Impact]] map[id:3 name:wakaba birthday:05-22 vivid_info:map[color:green weapon:Blade]] map[id:4 name:himawari birthday:07-23 vivid_info:map[color:yellow weapon:Collider]] map[id:0 name:rei]]

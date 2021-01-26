@@ -16,7 +16,7 @@ func main() {
 		panic(err)
 	}
 	read1, _ := ioutil.ReadFile("data1")
-	fmt.Print(string(read1))
+	fmt.Println(string(read1))
 
 	// File構造体を利用したファイルの読み書き
 	file1, _ := os.Create("data2")
@@ -32,4 +32,6 @@ func main() {
 	bytes, _ = file2.Read(read2)
 	fmt.Printf("Read %d bytes from file\n", bytes)
 	fmt.Println(string(read2))
+
+	fmt.Println("here")
 }
